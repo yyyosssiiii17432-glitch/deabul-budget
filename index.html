@@ -1,0 +1,80 @@
+<!doctype html><html lang="he" dir="rtl"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1f33"><meta name="description" content="ניהול תקציב משפחת דעבול">
+<title>משפחת דעבול | Budget Pro</title>
+<style>
+:root{--nav:#0b1f33;--blue:#2167e8;--cyan:#0ea5a4;--green:#16803c;--red:#d93025;--amber:#b77900;--bg:#f4f7fb;--card:#fff;--ink:#1f3448;--muted:#70859a;--line:#e3eaf2;--shadow:0 10px 30px rgba(11,31,51,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI",Arial;color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer}
+.top{background:linear-gradient(135deg,#0b1f33,#174c83);color:#fff}.topin{max-width:1180px;margin:auto;padding:18px 20px}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:13px;background:#ffffff18;border:1px solid #ffffff30;display:grid;place-items:center;font-size:23px}.brand b{font-size:20px}.brand small{display:block;opacity:.7;margin-top:2px}
+.nav{max-width:1180px;margin:auto;padding:0 20px 14px;display:flex;gap:7px;overflow:auto}.nav button{background:#ffffff12;color:#fff;border:1px solid #ffffff22;padding:9px 13px;border-radius:10px;white-space:nowrap}.nav button.active{background:#fff;color:var(--nav)}
+main{max-width:1180px;margin:auto;padding:18px 20px 80px}.toolbar{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:15px}.toolbar h1{margin:0;font-size:25px}.toolbar p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow)}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px}.kpi .l{font-size:12px;color:var(--muted);font-weight:750}.kpi .v{font-size:26px;font-weight:900;margin-top:7px}.green{color:var(--green)}.red{color:var(--red)}.blue{color:var(--blue)}.amber{color:var(--amber)}
+.title{font-size:17px;font-weight:900;margin-bottom:13px}.muted{color:var(--muted);font-size:12px}
+label{display:block;color:var(--muted);font-size:12px;font-weight:750;margin-bottom:9px}input,select{width:100%;padding:11px 12px;border:1px solid #d6e0ea;border-radius:11px;background:#fff;outline:none}input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2167e812}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:9px}.full{grid-column:1/-1}.actions{display:flex;gap:8px}.primary{background:var(--blue);color:#fff;border:0}.soft{background:#edf4ff;color:var(--blue);border:0}.danger{background:#fff0ef;color:var(--red);border:0}
+.alert{border-radius:14px;padding:12px 14px;margin:14px 0;font-weight:800}.ok{background:#e9f7ee;color:#176b34}.warn{background:#fff7df;color:#8a5b00}.bad{background:#fdebea;color:#a51f18}
+.progress{height:8px;background:#edf1f5;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--blue);border-radius:99px}.cat{margin:12px 0}.cathead{display:flex;justify-content:space-between;font-size:13px;font-weight:800;margin-bottom:5px}
+table{width:100%;border-collapse:collapse}th,td{padding:10px 6px;border-bottom:1px solid var(--line);font-size:13px;text-align:right}th{font-size:11px;color:var(--muted)}
+.auth{max-width:440px;margin:9vh auto}.authlogo{text-align:center;font-size:55px}.auth h1{text-align:center;margin:8px 0 4px}.auth p{text-align:center;color:var(--muted);font-size:13px}.tabs{display:flex;gap:7px;margin:18px 0 14px}.tabs button{flex:1;padding:10px;border-radius:10px;border:0}.hidden{display:none!important}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#0b1f33;color:#fff;padding:11px 16px;border-radius:12px;box-shadow:var(--shadow);z-index:30;font-weight:750}
+canvas{max-width:100%}
+@media(max-width:850px){.grid4{grid-template-columns:1fr 1fr}.grid3{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}}
+@media(max-width:520px){main{padding:12px 10px 60px}.topin{padding:15px 12px}.nav{padding:0 12px 11px}.grid4,.grid3{grid-template-columns:1fr 1fr;gap:8px}.card{padding:13px;border-radius:15px}.kpi .v{font-size:21px}.form{grid-template-columns:1fr}.full{grid-column:auto}.toolbar{align-items:flex-start}.toolbar h1{font-size:21px}.monthpick{max-width:135px}}
+</style></head><body>
+<div id="loginPage" class="auth card"><div class="authlogo">💰</div><h1>משפחת דעבול</h1><p>מרכז השליטה על כלכלת הבית</p><div class="tabs"><button id="lt" class="primary">כניסה</button><button id="rt" class="soft">יצירת חשבון</button></div><form id="authForm"><label>שם משתמש<input id="un" autocomplete="username" required></label><label>סיסמה<input id="pw" type="password" minlength="6" autocomplete="current-password" required></label><button id="authBtn" class="primary" style="width:100%;padding:12px">כניסה</button><div id="authErr" style="color:#d93025;margin-top:10px;font-size:12px"></div></form></div>
+
+<div id="shell" class="hidden">
+<header class="top"><div class="topin"><div class="brand"><div class="logo">₪</div><div><b>משפחת דעבול</b><small>Budget Pro · ניהול כלכלת הבית</small></div></div></div><div class="nav"><button data-page="home" class="active">🏠 דשבורד</button><button data-page="add">➕ הוצאה</button><button data-page="history">🧾 תנועות</button><button data-page="budget">🎯 תקציב</button><button id="logout">יציאה</button></div></header>
+<main>
+<section id="home">
+<div class="toolbar"><div><h1>שלום, <span id="user"></span> 👋</h1><p>התמונה הכלכלית שלך במבט אחד.</p></div><label class="monthpick">חודש<input id="month" type="month"></label></div>
+<div class="grid4">
+<div class="card kpi"><div class="l">הכנסות</div><div id="kIn" class="v green">₪0</div></div><div class="card kpi"><div class="l">הוצאות</div><div id="kEx" class="v red">₪0</div></div><div class="card kpi"><div class="l">יתרה</div><div id="kBal" class="v blue">₪0</div></div><div class="card kpi"><div class="l">ממוצע יומי</div><div id="kDay" class="v amber">₪0</div></div>
+</div><div id="status" class="alert ok">🟢</div>
+<div class="layout"><div class="card"><div class="title">📊 לאן הכסף הולך?</div><div id="catList"></div></div><div class="card"><div class="title">🎯 מצב התקציב</div><div id="budgetSummary"></div></div></div>
+<div class="layout"><div class="card"><div class="title">📈 מגמת הוצאות</div><canvas id="trend" height="220"></canvas></div><div class="card"><div class="title">⚡ פעולות מהירות</div><div class="actions"><button class="primary" onclick="page('add')">➕ הוצאה חדשה</button><button class="soft" onclick="showIncome()">💰 הכנסה</button></div><hr style="border:0;border-top:1px solid #e3eaf2;margin:18px 0"><div class="muted">טיפ: הזנה יומית של 5–10 שניות נותנת לך תמונה אמיתית של הכסף.</div></div></div>
+</section>
+
+<section id="add" class="hidden"><div class="toolbar"><div><h1>➕ הוספת הוצאה</h1><p>הזנה מהירה — בלי טבלאות ובלי נוסחאות.</p></div></div><div class="layout"><div class="card"><div class="title">הוצאה חדשה</div><form id="expenseForm" class="form"><label>סכום ₪<input id="amount" type="number" min="0" step=".01" inputmode="decimal" placeholder="250" required></label><label>תאריך<input id="date" type="date" required></label><label>קטגוריה<select id="category"></select></label><label>תת-קטגוריה<select id="subcategory"></select></label><label>אמצעי תשלום<select id="payment"><option>אשראי</option><option>מזומן</option><option>העברה בנקאית</option><option>הוראת קבע</option><option>אחר</option></select></label><label>סוג<select id="type"><option>משתנה</option><option>קבועה</option></select></label><label class="full">הערה<input id="note" placeholder="לדוגמה: קניות לשבת"></label><button class="primary full" style="padding:13px">שמור הוצאה</button></form></div><div class="card"><div class="title">💰 הכנסה</div><form id="incomeForm"><label>סכום ₪<input id="iamount" type="number" min="0" step=".01" required></label><label>תאריך<input id="idate" type="date" required></label><label class="full">מקור ההכנסה<input id="isource" placeholder="משכורת / הכנסה נוספת" required></label><button class="primary full">שמור הכנסה</button></form></div></div></section>
+
+<section id="history" class="hidden"><div class="toolbar"><div><h1>🧾 תנועות</h1><p>חיפוש וסינון של כל ההוצאות וההכנסות.</p></div></div><div class="card"><div class="row" style="display:flex;gap:8px;margin-bottom:12px"><input id="search" placeholder="חפש לפי קטגוריה או תיאור"><select id="filterType"><option value="">הכול</option><option>קבועה</option><option>משתנה</option></select></div><div style="overflow:auto"><table><thead><tr><th>תאריך</th><th>קטגוריה</th><th>תיאור</th><th>סוג</th><th>סכום</th><th></th></tr></thead><tbody id="table"></tbody></table></div></div></section>
+
+<section id="budget" class="hidden"><div class="toolbar"><div><h1>🎯 תקציב חודשי</h1><p>הגדר גבול לכל קטגוריה וקבל חיווי בזמן אמת.</p></div></div><div class="grid3" id="budgetGrid"></div></section>
+</main></div><div id="toast" class="toast hidden"></div>
+<script>
+let C={},D={expenses:[],incomes:[],budgets:{}},mode="login";
+const $=x=>document.getElementById(x),money=n=>"₪"+Math.round(n||0).toLocaleString("he-IL"),today=new Date(),iso=d=>new Date(d).toISOString().slice(0,10);
+async function api(u,o={}){let r=await fetch(u,{headers:{"Content-Type":"application/json"},...o});let j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.error||"שגיאה");return j}
+async function boot(){try{let me=await api("/api/me");$("user").textContent=me.username;$("loginPage").classList.add("hidden");$("shell").classList.remove("hidden");await load()}catch{}}
+async function load(){D=await api("/api/data");render();renderHistory();renderBudget()}
+function page(p){document.querySelectorAll("main>section").forEach(s=>s.classList.add("hidden"));$(p).classList.remove("hidden");document.querySelectorAll(".nav button[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===p))}
+document.querySelectorAll(".nav button[data-page]").forEach(b=>b.onclick=()=>page(b.dataset.page));
+$("lt").onclick=()=>{mode="login";$("lt").className="primary";$("rt").className="soft";$("authBtn").textContent="כניסה"};
+$("rt").onclick=()=>{mode="reg";$("rt").className="primary";$("lt").className="soft";$("authBtn").textContent="יצירת חשבון"};
+$("authForm").onsubmit=async e=>{e.preventDefault();try{await api(mode==="login"?"/api/login":"/api/register",{method:"POST",body:JSON.stringify({username:$("un").value,password:$("pw").value})});boot()}catch(x){$("authErr").textContent=x.message}}
+$("logout").onclick=async()=>{await api("/api/logout",{method:"POST"});location.reload()};
+$("month").value=iso(today).slice(0,7);$("date").value=iso(today);$("idate").value=iso(today);$("month").onchange=()=>{render();renderBudget()};
+async function setup(){C=await fetch("/categories.json").then(r=>r.json());$("category").innerHTML=Object.keys(C).map(x=>`<option>${x}</option>`).join("");subs()}
+function subs(){let x=$("category").value;$("subcategory").innerHTML=(C[x]||[]).map(v=>`<option>${v}</option>`).join("")}
+$("category").onchange=subs;
+$("expenseForm").onsubmit=async e=>{e.preventDefault();try{await api("/api/expenses",{method:"POST",body:JSON.stringify({amount:$("amount").value,date:$("date").value,category:$("category").value,subcategory:$("subcategory").value,payment:$("payment").value,type:$("type").value,note:$("note").value})});e.target.reset();$("date").value=iso(today);subs();toast("ההוצאה נשמרה ✓");await load();page("home")}catch(x){toast(x.message)}};
+$("incomeForm").onsubmit=async e=>{e.preventDefault();await api("/api/incomes",{method:"POST",body:JSON.stringify({amount:$("iamount").value,date:$("idate").value,source:$("isource").value})});e.target.reset();$("idate").value=iso(today);toast("ההכנסה נשמרה ✓");load()};
+function month(){return $("month").value}
+function render(){
+let m=month(),ex=D.expenses.filter(x=>x.date.startsWith(m)),inc=D.incomes.filter(x=>x.date.startsWith(m)),E=ex.reduce((a,x)=>a+x.amount,0),I=inc.reduce((a,x)=>a+x.amount,0);
+$("kIn").textContent=money(I);$("kEx").textContent=money(E);$("kBal").textContent=money(I-E);let days=m===iso(today).slice(0,7)?today.getDate():new Date(new Date(m+"-01").getFullYear(),new Date(m+"-01").getMonth()+1,0).getDate();$("kDay").textContent=money(E/days);
+let budgets=Object.values(D.budgets).reduce((a,b)=>a+(+b||0),0),s=$("status");if(budgets&&E>budgets){s.className="alert bad";s.textContent="🔴 חרגת מהתקציב החודשי הכולל."}else if(budgets&&E>budgets*.85){s.className="alert warn";s.textContent="🟠 אתה מתקרב לתקרת התקציב."}else{s.className="alert ok";s.textContent=budgets?"🟢 אתה בתוך המסגרת שהגדרת.":"💡 עדיין לא הגדרת תקציב — זה הזמן לקבוע יעד."}
+let sums={};ex.forEach(x=>sums[x.category]=(sums[x.category]||0)+x.amount);let max=Math.max(1,...Object.values(sums));
+$("catList").innerHTML=Object.entries(sums).sort((a,b)=>b[1]-a[1]).map(([c,v])=>`<div class="cat"><div class="cathead"><span>${c}</span><span>${money(v)}</span></div><div class="progress"><i style="width:${v/max*100}%"></i></div></div>`).join("")||"<div class='muted'>אין הוצאות החודש.</div>";
+$("budgetSummary").innerHTML=Object.keys(C).map(c=>{let b=+D.budgets[c]||0,v=sums[c]||0,p=b?v/b*100:0;return `<div class="cat"><div class="cathead"><span>${c}</span><span>${b?money(v)+" / "+money(b):"לא הוגדר"}</span></div><div class="progress"><i style="width:${Math.min(p,100)}%;background:${p>100?'#d93025':p>85?'#b77900':'#2167e8'}"></i></div></div>`}).join("");
+drawTrend()
+}
+function drawTrend(){let cv=$("trend"),ctx=cv.getContext("2d"),w=cv.clientWidth*2,h=220*2;cv.width=w;cv.height=h;ctx.clearRect(0,0,w,h);let vals=[];for(let i=5;i>=0;i--){let d=new Date();d.setMonth(d.getMonth()-i);let m=d.toISOString().slice(0,7),v=D.expenses.filter(x=>x.date.startsWith(m)).reduce((a,x)=>a+x.amount,0);vals.push([m,v])}let max=Math.max(1,...vals.map(x=>x[1])),pad=40,step=(w-pad*2)/(vals.length-1);ctx.strokeStyle="#dfe7ef";ctx.lineWidth=2;ctx.beginPath();vals.forEach((x,i)=>{let px=pad+i*step,py=h-pad-(x[1]/max)*(h-pad*2);i?ctx.lineTo(px,py):ctx.moveTo(px,py)});ctx.stroke();ctx.fillStyle="#2167e8";vals.forEach((x,i)=>{let px=pad+i*step,py=h-pad-(x[1]/max)*(h-pad*2);ctx.beginPath();ctx.arc(px,py,6,0,7);ctx.fill();ctx.fillStyle="#70859a";ctx.font="20px Arial";ctx.fillText(x[0].slice(5),px-12,h-10);ctx.fillStyle="#2167e8"})}
+function renderHistory(){let q=($("search").value||"").toLowerCase(),ft=$("filterType").value;let rows=D.expenses.filter(x=>(!ft||x.type===ft)&&(`${x.category} ${x.subcategory} ${x.note}`.toLowerCase().includes(q))).slice(0,100);$("table").innerHTML=rows.map(x=>`<tr><td>${x.date.split("-").reverse().join("/")}</td><td>${x.category}</td><td>${x.note||x.subcategory}</td><td>${x.type}</td><td>${money(x.amount)}</td><td><button class="danger" onclick="del(${x.id})">מחיקה</button></td></tr>`).join("")||'<tr><td colspan="6">לא נמצאו תנועות.</td></tr>'}
+$("search").oninput=renderHistory;$("filterType").onchange=renderHistory;
+function renderBudget(){$("budgetGrid").innerHTML=Object.keys(C).map(c=>`<div class="card"><div class="title">${c}</div><div class="muted">תקציב חודשי</div><input type="number" min="0" value="${D.budgets[c]||""}" placeholder="₪ 0" data-budget="${c}" style="margin-top:8px"><button class="primary" data-save="${c}" style="width:100%;margin-top:8px">שמור תקציב</button></div>`).join("");document.querySelectorAll("[data-save]").forEach(b=>b.onclick=async()=>{let c=b.dataset.save,i=document.querySelector(`[data-budget="${CSS.escape(c)}"]`);await api("/api/budgets",{method:"PUT",body:JSON.stringify({category:c,amount:i.value})});toast("התקציב עודכן ✓");load()})}
+async function del(id){await api("/api/expenses/"+id,{method:"DELETE"});toast("ההוצאה נמחקה");load()}
+function showIncome(){page("add");$("iamount").focus()}
+function toast(t){$("toast").textContent=t;$("toast").classList.remove("hidden");setTimeout(()=>$("toast").classList.add("hidden"),1800)}
+setup().then(boot);
+</script></body></html>
