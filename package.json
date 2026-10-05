@@ -1,12 +1,12 @@
 {
   "name": "deabul-family-budget-pro",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "better-sqlite3": "^11.7.0",
+    "@libsql/client": "^0.15.15",
     "cookie-parser": "^1.4.7",
     "express": "^4.21.2"
   }
